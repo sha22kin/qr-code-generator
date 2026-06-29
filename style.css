@@ -1,0 +1,519 @@
+/* ==========================================================================
+   Design System Variables & Themes
+   ========================================================================== */
+:root {
+  /* Dark Theme Default Variables */
+  --bg-main: #0B0F19;
+  --bg-card: #151C2C;
+  --bg-input: #1E293B;
+  --border-color: #2D3748;
+  --text-main: #F8FAFC;
+  --text-muted: #94A3B8;
+  --color-primary: #6366F1;
+  --color-primary-glow: rgba(99, 102, 241, 0.15);
+  --color-primary-hover: #4F46E5;
+  --color-success: #10B981;
+  --color-danger: #EF4444;
+  --color-info: #06B6D4;
+  --font-family: 'Inter', sans-serif;
+  --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  --glass-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  --transition-speed: 0.25s;
+}
+
+[data-bs-theme="light"] {
+  /* Light Theme Variables */
+  --bg-main: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-input: #F1F5F9;
+  --border-color: #E2E8F0;
+  --text-main: #0F172A;
+  --text-muted: #64748B;
+  --color-primary: #4F46E5;
+  --color-primary-glow: rgba(79, 70, 229, 0.1);
+  --color-primary-hover: #4338CA;
+  --color-success: #059669;
+  --color-danger: #DC2626;
+  --color-info: #0891B2;
+  --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+  --glass-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+}
+
+/* ==========================================================================
+   Base Elements Override
+   ========================================================================== */
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-family);
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ==========================================================================
+   Navigation Bar
+   ========================================================================== */
+.nav-bar-custom {
+  background-color: var(--bg-card);
+  border-color: var(--border-color) !important;
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(10px);
+}
+
+.logo-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-color: var(--color-primary-glow);
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+}
+
+.btn-theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--bg-input);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-speed) ease, background-color var(--transition-speed) ease;
+}
+
+.btn-theme-toggle:hover {
+  transform: rotate(15deg) scale(1.05);
+  background-color: var(--border-color);
+}
+
+/* ==========================================================================
+   Typography & Headers
+   ========================================================================== */
+.hero-title {
+  font-size: 2.25rem;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, var(--text-main) 30%, var(--color-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.hero-subtitle {
+  color: var(--text-muted) !important;
+  font-size: 1.05rem;
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   Cards Styling (Glassmorphism & Neon Shadows)
+   ========================================================================== */
+.card-custom {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow), var(--glass-shadow);
+  transition: transform var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+.card-custom:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.icon-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   Form Fields (Inputs, Dropdowns, Custom Color Pickers)
+   ========================================================================== */
+.input-custom, .select-custom {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.input-custom:focus, .select-custom:focus {
+  background-color: var(--bg-input);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-glow);
+  color: var(--text-main);
+}
+
+.select-custom {
+  cursor: pointer;
+}
+
+/* Color Picker Row */
+.color-picker-wrapper {
+  position: relative;
+}
+
+.color-input-custom {
+  padding: 0;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  background: none;
+}
+
+.color-input-custom::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.color-input-custom::-webkit-color-swatch {
+  border: none;
+  border-radius: 7px;
+}
+
+/* Logo Upload Dropzone */
+.logo-upload-wrapper {
+  border-color: var(--border-color) !important;
+  background-color: rgba(0, 0, 0, 0.05);
+  transition: border-color var(--transition-speed) ease, background-color var(--transition-speed) ease;
+  cursor: pointer;
+}
+
+.logo-upload-wrapper:hover {
+  border-color: var(--color-primary) !important;
+  background-color: var(--color-primary-glow);
+}
+
+.file-input-hidden {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.logo-upload-placeholder {
+  pointer-events: none;
+  padding: 0.5rem 0;
+}
+
+.logo-preview-box {
+  position: relative;
+  z-index: 3;
+}
+
+.logo-preview-box img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   QR Code Output Preview Area
+   ========================================================================== */
+.qr-output-section {
+  background-color: var(--bg-input) !important;
+  border: 1px solid var(--border-color);
+  min-height: 280px;
+}
+
+.qr-placeholder-wrapper {
+  position: relative;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  max-width: 100%;
+}
+
+/* When showing the placeholder text (which shouldn't have white bg container) */
+.qr-output-section:has(#qr-placeholder-element) .qr-placeholder-wrapper {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.qr-canvas-holder canvas {
+  display: block;
+  max-width: 100%;
+  height: auto !important;
+  border-radius: 8px;
+}
+
+/* ==========================================================================
+   Action Buttons (Generator Actions)
+   ========================================================================== */
+.btn-action-main {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 0.6rem 1.5rem;
+  box-shadow: 0 4px 14px 0 var(--color-primary-glow);
+  transition: all var(--transition-speed) ease;
+}
+
+.btn-action-main:hover {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px 0 var(--color-primary-glow);
+}
+
+.btn-action-main:active {
+  transform: translateY(0);
+}
+
+.btn-action-sub {
+  background-color: var(--bg-input);
+  border-color: var(--border-color);
+  color: var(--text-main);
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 0.6rem 1.25rem;
+  transition: all var(--transition-speed) ease;
+}
+
+.btn-action-sub:hover:not(:disabled) {
+  background-color: var(--border-color);
+  color: var(--text-main);
+  transform: translateY(-2px);
+}
+
+.btn-action-sub:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Scanner Overlay & Video Viewport
+   ========================================================================== */
+.scanner-frame-wrapper {
+  border-color: var(--border-color) !important;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+#camera-reader-viewport {
+  width: 100%;
+  height: 100%;
+}
+
+#camera-reader-viewport video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scanner-idle-state {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-card);
+  z-index: 2;
+}
+
+.idle-icon-pulse {
+  animation: pulse-ring 2s cubic-bezier(0.215, 0.610, 0.355, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.5; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+  100% { transform: scale(0.95); opacity: 0.5; }
+}
+
+/* Laser Sweep Overlay */
+.scanner-overlay-laser {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scanner-bounding-box {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+/* Corner Guides for Bounding Box */
+.corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--color-primary);
+  border-style: solid;
+  pointer-events: none;
+}
+.tl { top: 0; left: 0; border-width: 4px 0 0 4px; border-top-left-radius: 4px; }
+.tr { top: 0; right: 0; border-width: 4px 4px 0 0; border-top-right-radius: 4px; }
+.bl { bottom: 0; left: 0; border-width: 0 0 4px 4px; border-bottom-left-radius: 4px; }
+.br { bottom: 0; right: 0; border-width: 0 4px 4px 0; border-bottom-right-radius: 4px; }
+
+/* Laser Beam Sweeper Line */
+.laser-beam {
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-primary);
+  box-shadow: 0 0 15px 3px var(--color-primary);
+  top: 0;
+  animation: laser-sweep 2.5s linear infinite;
+}
+
+@keyframes laser-sweep {
+  0% { top: 0%; }
+  50% { top: 100%; }
+  100% { top: 0%; }
+}
+
+/* Drag and Drop File Scanner Zone */
+.file-dropzone {
+  min-height: 280px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: var(--border-color) !important;
+  transition: all var(--transition-speed) ease;
+}
+
+.file-dropzone:hover, .file-dropzone.dragover {
+  border-color: var(--color-primary) !important;
+  background-color: var(--color-primary-glow);
+}
+
+.max-h-200 {
+  max-height: 200px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* ==========================================================================
+   Scan Result Display UI
+   ========================================================================== */
+.scan-result-card {
+  border-color: var(--border-color) !important;
+}
+
+.result-textarea {
+  resize: none;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-main) !important;
+}
+
+/* ==========================================================================
+   History Logs Table Customization
+   ========================================================================== */
+.table-custom {
+  color: var(--text-main);
+}
+
+.table-custom th {
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.table-custom td {
+  padding: 1rem 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table-custom tr:last-child td {
+  border-bottom: none;
+}
+
+.table-custom tr {
+  transition: background-color var(--transition-speed) ease;
+}
+
+.table-custom tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Badge Styling */
+.badge {
+  padding: 0.4em 0.75em;
+  font-weight: 500;
+  border-radius: 6px;
+}
+
+.badge-scan {
+  background-color: rgba(6, 182, 212, 0.15);
+  color: var(--color-info);
+}
+
+.badge-generate {
+  background-color: rgba(99, 102, 241, 0.15);
+  color: var(--color-primary);
+}
+
+/* ==========================================================================
+   Toasts & Footer Layout
+   ========================================================================== */
+#toast-notify {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.footer-custom {
+  border-color: var(--border-color) !important;
+}
+
+/* Utility Helpers */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.btn-xs {
+  padding: 0.25rem 0.4rem;
+  font-size: 0.75rem;
+  border-radius: 4px;
+}
