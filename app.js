@@ -343,18 +343,31 @@ $(document).ready(function() {
         $('#btn-camera-control').removeAttr('disabled');
       } else {
         $('#camera-select').html('<option value="">No cameras detected</option>');
-        showToast("No camera devices detected.", "warning");
       }
     }).catch(err => {
       console.error("Camera detection error:", err);
-      $('#camera-select').html('<option value="">Camera access blocked</option>');
+      $('#camera-select').html('<option value="request">Camera access blocked (Tap Start)</option>');
+      $('#camera-select').removeAttr('disabled');
     });
   }
 
   function startScanning() {
     const cameraId = $('#camera-select').val();
-    if (!cameraId) {
-      showToast("Please select a camera to start.", "warning");
+    if (!cameraId || cameraId === 'request') {
+      // Try to request cameras on user click (fixes mobile permissions)
+      Html5Qrcode.getCameras().then(devices => {
+        if (devices && devices.length) {
+          loadCameras(); // refresh list
+          setTimeout(() => {
+            $('#camera-select').val(devices[0].id);
+            startScanning(); // restart with first camera
+          }, 100);
+        } else {
+          showToast("No camera devices detected.", "warning");
+        }
+      }).catch(err => {
+        showToast("Camera access denied. Please allow permissions in your browser settings.", "danger");
+      });
       return;
     }
     
