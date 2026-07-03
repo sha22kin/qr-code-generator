@@ -366,7 +366,8 @@ $(document).ready(function() {
           showToast("No camera devices detected.", "warning");
         }
       }).catch(err => {
-        showToast("Camera access denied. Please allow permissions in your browser settings.", "danger");
+        var permissionModal = new bootstrap.Modal(document.getElementById('cameraPermissionModal'));
+        permissionModal.show();
       });
       return;
     }
@@ -397,7 +398,8 @@ $(document).ready(function() {
       showToast("Camera started scanning.");
     }).catch(err => {
       console.error("Camera startup error:", err);
-      showToast("Could not start camera. Check permissions.", "danger");
+      var permissionModal = new bootstrap.Modal(document.getElementById('cameraPermissionModal'));
+      permissionModal.show();
       stopScanning();
     });
   }

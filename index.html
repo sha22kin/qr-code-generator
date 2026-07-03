@@ -350,6 +350,31 @@
     </div>
   </div>
 
+  <!-- Camera Permission Modal -->
+  <div class="modal fade" id="cameraPermissionModal" tabindex="-1" aria-labelledby="cameraPermissionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-bold text-danger" id="cameraPermissionModalLabel">
+            <i class="fa-solid fa-camera-rotate me-2"></i>Camera Access Required
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center py-4">
+          <div class="mb-3">
+            <i class="fa-solid fa-mobile-screen-button text-muted" style="font-size: 3rem;"></i>
+          </div>
+          <p class="mb-2 fw-medium">We need access to your camera to scan QR codes.</p>
+          <p class="text-muted small mb-0">It looks like your browser has blocked camera permissions for this site. Please go to your device or browser <strong>Settings &gt; Permissions</strong> to allow camera access, then try again.</p>
+        </div>
+        <div class="modal-footer border-0 d-flex justify-content-center pt-0 pb-4">
+          <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary px-4" onclick="window.location.reload()">Reload Page</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- jQuery CDN -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <!-- Bootstrap 5 Bundle JS CDN -->
