@@ -352,24 +352,12 @@ $(document).ready(function() {
   }
 
   function startScanning() {
-    const cameraId = $('#camera-select').val();
+    let cameraId = $('#camera-select').val();
+    let cameraConfig = cameraId;
+
+    // If no camera selected or it's in 'request' state, use facingMode to force native permission prompt
     if (!cameraId || cameraId === 'request') {
-      // Try to request cameras on user click (fixes mobile permissions)
-      Html5Qrcode.getCameras().then(devices => {
-        if (devices && devices.length) {
-          loadCameras(); // refresh list
-          setTimeout(() => {
-            $('#camera-select').val(devices[0].id);
-            startScanning(); // restart with first camera
-          }, 100);
-        } else {
-          showToast("No camera devices detected.", "warning");
-        }
-      }).catch(err => {
-        var permissionModal = new bootstrap.Modal(document.getElementById('cameraPermissionModal'));
-        permissionModal.show();
-      });
-      return;
+      cameraConfig = { facingMode: "environment" };
     }
     
     // Create camera reader instance
@@ -380,7 +368,7 @@ $(document).ready(function() {
     $('#camera-laser-overlay').removeClass('d-none');
     
     html5QrCode.start(
-      cameraId, 
+      cameraConfig, 
       {
         fps: 10,
         qrbox: { width: 220, height: 220 }
@@ -396,6 +384,21 @@ $(document).ready(function() {
       $('#btn-camera-control').html('<i class="fa-solid fa-stop me-1"></i>Stop Camera').addClass('btn-danger').removeClass('btn-outline-primary');
       $('#camera-select').attr('disabled', true);
       showToast("Camera started scanning.");
+      
+      // If we used the fallback config, the permission is now granted, so let's reload the camera list in the background
+      if (typeof cameraConfig === 'object') {
+        Html5Qrcode.getCameras().then(devices => {
+          if (devices && devices.length) {
+            const $select = $('#camera-select');
+            $select.empty().removeAttr('disabled');
+            devices.forEach(device => {
+              const label = device.label || `Camera ${$select.children().length + 1}`;
+              $select.append(`<option value="${device.id}">${label}</option>`);
+            });
+            $('#camera-select').attr('disabled', true); // keep disabled while scanning
+          }
+        }).catch(e => console.error(e));
+      }
     }).catch(err => {
       console.error("Camera startup error:", err);
       var permissionModal = new bootstrap.Modal(document.getElementById('cameraPermissionModal'));
